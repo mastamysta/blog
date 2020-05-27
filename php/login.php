@@ -70,6 +70,7 @@
 
     function updateHash($username, $plaintext, $conn) {
         $newSalt = utf8_encode(random_bytes(16));
+        $newSalt = checkSalt($newSalt);
         $newHash = utf8_encode(hash_hmac("sha256", $plaintext, $newSalt));
         $newStoredVal = $newSalt . "$" . $newHash;
         echo($newStoredVal);
@@ -78,6 +79,18 @@
         $sql = mysqli_prepare($conn, "UPDATE admin SET Hash= ? WHERE Username= ?");
         mysqli_stmt_bind_param($sql, "ss", $newStoredVal, $username);
         mysqli_stmt_execute($sql);
+    }
+
+    function checkSalt($salt){
+        $newSalt = "";
+        for($i = 0; $i <= strlen($salt) - 1; $i ++){
+            if($salt[$i] == '$'){
+                echo("removed a $ error");
+                $newSalt = utf8_encode(random_bytes(16));
+                return checkSalt($newSalt);
+            }
+        }
+        return $salt;
     }
    
 ?>
