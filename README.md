@@ -1,5 +1,4 @@
-<h1>blog.php<h1>
-<br>
+<h1>blog.php</h1>
 <h2>Background</h2>
 <p>
   The aim of this project is to produce a small personal log website to be hosted on my personal domain: https://www.benread.dev
