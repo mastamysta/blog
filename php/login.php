@@ -21,13 +21,23 @@
     }
 
     //create SQL query
-    $sql = "SELECT Hash FROM admin WHERE Username='" . $USERNAME . "'";
-    $result = mysqli_query($conn, $sql);
-    $oldHash;
+    $sql = mysqli_prepare($conn, "SELECT Hash FROM admin WHERE Username= ?");
+    mysqli_stmt_bind_param($sql, "s", $USERNAME);
+    $result;
+    
+    
+    mysqli_stmt_execute($sql);
+    mysqli_stmt_bind_result($sql, $result);
+    $count = 0;
+    while (mysqli_stmt_fetch($sql)) {
+        $count += 1;
+    }
 
+  
     //get hash for username provided
-    if (mysqli_num_rows($result) > 0){
-        $oldHash = (mysqli_fetch_assoc($result))["Hash"];
+    $oldHash;
+    if ($count > 0){
+        $oldHash = ($result);
         if(checkHash($oldHash, $PASSWORD)){
             echo("password valid updating hash to: <br>");
             updateHash($USERNAME, $PASSWORD, $conn);
@@ -65,8 +75,9 @@
         echo($newStoredVal);
 
         //will be used to update hash for each login once fully implimented
-        $sql = "UPDATE admin SET Hash='" . $newStoredVal . "' WHERE Username='" . $username . "'";
-        $result = mysqli_query($conn, $sql);
+        $sql = mysqli_prepare($conn, "UPDATE admin SET Hash= ? WHERE Username= ?");
+        mysqli_stmt_bind_param($sql, "ss", $newStoredVal, $username);
+        mysqli_stmt_execute($sql);
     }
    
 ?>
