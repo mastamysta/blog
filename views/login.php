@@ -1,5 +1,8 @@
 <!doctype html>
 <html>
+  <?php
+    include("../php/checkSession.php");
+  ?>
   <head>
     <meta charset="utf-8">
 
@@ -16,27 +19,27 @@
       <div class="collapse navbar-collapse">
         <ul class="mr-auto navbar-nav">
           <li class="nav-item active">
-            <a href="../index.html" class="nav-link">
+            <a href="../index.php" class="nav-link">
               Blog
             </a>
           </li>
           <li class="nav-item disabled">
-            <a href="portfolio.html" class="nav-link disabled">
+            <a href="portfolio.php" class="nav-link disabled">
               Portolio
             </a>
           </li>
           <li class="nav-item active">
-            <a href="contact.html" class="nav-link">
+            <a href="contact.php" class="nav-link">
               Contact Me
             </a>
           </li>
           <li class="nav-item active">
-            <a href="register.html" class="nav-link">
+            <a href="register.php" class="nav-link">
               Blog Admin Registration
             </a>
           </li>
           <li class="nav-item active">
-            <a href="login.html" class="nav-link">
+            <a href="login.php" class="nav-link">
               Admin Login
             </a>
           </li>
