@@ -1,4 +1,5 @@
 <?php
+
     //values posted for html login form
     $USERNAME = $_POST["userName"];
     $PASSWORD = $_POST["passWord"];
@@ -32,8 +33,7 @@
     while (mysqli_stmt_fetch($sql)) {
         $count += 1;
     }
-
-  
+    
     //get hash for username provided
     $oldHash;
     if ($count > 0){
