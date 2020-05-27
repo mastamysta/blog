@@ -22,13 +22,17 @@
     }
 
     //create SQL query
+    $blankSession = "";
     $saltedPassword = createhash($USERNAME, $PASSWORD, $conn);
-    $sql = "INSERT INTO admin (Username, Hash, Email) VALUES('" . $USERNAME . "', '" . $saltedPassword . "', '" . $EMAIL . "')";
+    $sql = mysqli_prepare($conn, "INSERT INTO admin (Username, Hash, Email, SessionID) VALUES(?, ?, ?, ?)");
+    mysqli_stmt_bind_param($sql, "ssss", $USERNAME, $saltedPassword, $EMAIL, $blankSession);
+    mysqli_stmt_execute($sql);
 
-    if (mysqli_query($conn, $sql)) {
-        echo "New record created successfully";
-    } else {
+    if (mysqli_stmt_affected_rows($sql) <= 0){
         echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }else{
+        echo "New record created successfully";
+
     }
 
   
