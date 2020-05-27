@@ -22,10 +22,9 @@
     }
 
     //create SQL query
-    $blankSession = "";
     $saltedPassword = createhash($USERNAME, $PASSWORD, $conn);
-    $sql = mysqli_prepare($conn, "INSERT INTO admin (Username, Hash, Email, SessionID) VALUES(?, ?, ?, ?)");
-    mysqli_stmt_bind_param($sql, "ssss", $USERNAME, $saltedPassword, $EMAIL, $blankSession);
+    $sql = mysqli_prepare($conn, "INSERT INTO admin (Username, Hash, Email) VALUES(?, ?, ?)");
+    mysqli_stmt_bind_param($sql, "sss", $USERNAME, $saltedPassword, $EMAIL);
     mysqli_stmt_execute($sql);
 
     if (mysqli_stmt_affected_rows($sql) <= 0){
