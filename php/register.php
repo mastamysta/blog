@@ -38,11 +38,24 @@
 
     function createHash($username, $plaintext, $conn) {
         $newSalt = utf8_encode(random_bytes(16));
+        $newSalt = checkSalt($newSalt);
         $newHash = hash_hmac("sha256", $plaintext, $newSalt);
         $newStoredVal = $newSalt . "$" . utf8_encode($newHash);
         echo($newStoredVal);
 
         return $newStoredVal;
+    }
+
+    function checkSalt($salt){
+        $newSalt = "";
+        for($i = 0; $i <= strlen($salt) - 1; $i ++){
+            if($salt[$i] == '$'){
+                echo("removed a $ error");
+                $newSalt = utf8_encode(random_bytes(16));
+                return checkSalt($newSalt);
+            }
+        }
+        return $salt;
     }
    
 ?>
