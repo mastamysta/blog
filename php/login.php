@@ -1,4 +1,7 @@
 <?php
+    $id = random_int(0, 4294967295);
+    session_id($id);
+    session_start();
 
     //values posted for html login form
     $USERNAME = $_POST["userName"];
@@ -22,13 +25,13 @@
     }
 
     //create SQL query
-    $sql = mysqli_prepare($conn, "SELECT Hash FROM admin WHERE Username= ?");
+    $sql = mysqli_prepare($conn, "SELECT Hash, eMail FROM admin WHERE Username= ?");
     mysqli_stmt_bind_param($sql, "s", $USERNAME);
-    $result;
-    
+    $resultHash;
+    $resultEmail;
     
     mysqli_stmt_execute($sql);
-    mysqli_stmt_bind_result($sql, $result);
+    mysqli_stmt_bind_result($sql, $resultHash, $resultEmail);
     $count = 0;
     while (mysqli_stmt_fetch($sql)) {
         $count += 1;
@@ -36,11 +39,13 @@
     
     //get hash for username provided
     $oldHash;
-    if ($count > 0){
-        $oldHash = ($result);
+    if ($count == 1){
+        $oldHash = $resultHash;
+        $email = $resultEmail;
         if(checkHash($oldHash, $PASSWORD)){
             echo("password valid updating hash to: <br>");
             updateHash($USERNAME, $PASSWORD, $conn);
+            logSession($email, $conn);
         }else{
             die("Invalid Password");
         }
@@ -50,6 +55,7 @@
     }
 
     mysqli_close($conn);
+    session_destroy();
 
     function checkHash($hash, $password){
 
@@ -66,6 +72,21 @@
         }else{
             return false;
         }
+    }
+
+    function logSession($userEmail, $conn){
+        //check for an existing session and deleting those that exist
+        $sql = mysqli_prepare($conn, "SELECT SessionID FROM sessions WHERE Email= ?");
+        mysqli_stmt_bind_param($sql, "s", $userEmail);
+        mysqli_stmt_execute($sql);
+        mysqli_stmt_close($sql);
+
+        //create new session record
+        $id = session_id();
+        $sql2 = mysqli_prepare($conn, "INSERT INTO sessions (SessionID, Email) VALUES (?, ?)");
+        mysqli_stmt_bind_param($sql2, "is", $id, $userEmail);
+        mysqli_stmt_execute($sql2);
+        mysqli_stmt_close($sql2);
     }
 
     function updateHash($username, $plaintext, $conn) {
