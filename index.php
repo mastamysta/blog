@@ -53,7 +53,7 @@
               echo('
                 <ul class="navbar-nav d-flex justify-content-end">
                   <li class="nav-item active p-2">
-                    <a href="compose.php" class="nav-link">
+                    <a href="views/compose.php" class="nav-link">
                       Create a Post
                     </a>
                   </li>

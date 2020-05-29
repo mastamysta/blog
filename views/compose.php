@@ -1,12 +1,8 @@
 <!doctype html>
 <html>
-  <?php
+<?php
     include("../php/checkSession.php");
-    if(!checkSession()){
-
-    }else{
-      header("Location: ../index.php");
-    }
+    include("../php/getSessionName.php");
   ?>
   <head>
     <meta charset="utf-8">
@@ -23,27 +19,27 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="collapse navbar-collapse">
         <ul class="mr-auto navbar-nav">
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="../index.php" class="nav-link">
               Blog
             </a>
           </li>
-          <li class="nav-item disabled">
+          <li class="nav-item disabled p-2">
             <a href="portfolio.php" class="nav-link disabled">
               Portolio
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="contact.php" class="nav-link">
               Contact Me
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="register.php" class="nav-link">
               Blog Admin Registration
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="login.php" class="nav-link">
               Admin Login
             </a>
@@ -56,7 +52,7 @@
             $userName = getSessionName(checkSession());
             echo('
               <ul class="navbar-nav d-flex justify-content-end">
-                <li class="nav-item active p-5">
+                <li class="nav-item active p-2">
                   <a href="compose.php" class="nav-link">
                     Create a Post
                   </a>
@@ -81,12 +77,12 @@
 
     <!--CREATE POST FORM-->
     <div class="container p-5">
-      <h1>Administrator Login</h1>
-      <form action="../php/create.php" method="POST">
+      <h1>Create a Post</h1>
+      <form action="../php/createPost.php" method="POST">
         <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" name="passWord" id="password" class="form-control" placeholder="Password" aria-describedby="pwHelpText">
-          <small id="pwHelpText" class="text-muted">Enter Your Password Here</small>
+          <label for="text">What's on you're mind, <?php echo(getSessionName(checkSession()))?>?</label>
+          <textarea type="text" name="Content" id="content" rows="5" class="form-control" placeholder="Today I am..." aria-describedby="pwHelpText"></textarea>
+          <small id="pwHelpText" class="text-muted">Write your post here</small>
         </div>
         <button type="submit" class="btn btn-dark">Post</button>
       </form>
