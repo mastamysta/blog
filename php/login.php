@@ -55,7 +55,6 @@
     }
 
     mysqli_close($conn);
-    session_destroy();
 
     function checkHash($hash, $password){
 
@@ -76,7 +75,7 @@
 
     function logSession($userEmail, $conn){
         //check for an existing session and deleting those that exist
-        $sql = mysqli_prepare($conn, "SELECT SessionID FROM sessions WHERE Email= ?");
+        $sql = mysqli_prepare($conn, "DELETE FROM sessions WHERE Email= ?");
         mysqli_stmt_bind_param($sql, "s", $userEmail);
         mysqli_stmt_execute($sql);
         mysqli_stmt_close($sql);

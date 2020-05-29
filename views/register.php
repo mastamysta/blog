@@ -1,5 +1,9 @@
 <!doctype html>
 <html>
+  <?php
+    include("../php/checkSession.php");
+    include("../php/getSessionName.php");
+  ?>
   <head>
     <meta charset="utf-8">
 
@@ -41,6 +45,27 @@
             </a>
           </li>
         </ul>
+        <?php
+          if(!checkSession()){
+
+          }else{
+            $userName = getSessionName(checkSession());
+            echo('
+              <ul class="mr-auto navbar-nav d-flex justify-content-end">
+                <li class="nav-item active p-2">
+                  <a href="#" class="nav-link">
+                    Welcome Back ' . $userName . '
+                  </a>
+                </li>
+                <li class="nav-item active p-2">
+                  <form action="../php/logout.php" method="post" id="form1">
+                    <button id="logout-btn" class="btn btn-outline-light my-2 my-sm-0">Logout</button>
+                  </form>
+                </li>
+              </ul>
+            ');
+          }
+        ?>
       </div>
     </nav>
 
