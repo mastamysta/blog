@@ -2,7 +2,11 @@
 <html>
   <?php
     include("../php/checkSession.php");
-    include("../php/getSessionName.php");
+    if(!checkSession()){
+
+    }else{
+      header("Location: ../index.php");
+    }
   ?>
   <head>
     <meta charset="utf-8">
@@ -52,7 +56,7 @@
             $userName = getSessionName(checkSession());
             echo('
               <ul class="navbar-nav d-flex justify-content-end">
-                <li class="nav-item active p-2">
+                <li class="nav-item active p-5">
                   <a href="compose.php" class="nav-link">
                     Create a Post
                   </a>
@@ -74,6 +78,21 @@
       </div>
     </nav>
 
+
+    <!--CREATE POST FORM-->
+    <div class="container p-5">
+      <h1>Administrator Login</h1>
+      <form action="../php/create.php" method="POST">
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="passWord" id="password" class="form-control" placeholder="Password" aria-describedby="pwHelpText">
+          <small id="pwHelpText" class="text-muted">Enter Your Password Here</small>
+        </div>
+        <button type="submit" class="btn btn-dark">Post</button>
+      </form>
+    </div>
+
+
     <!--GITHUB LINK -->
     <nav class="navbar fixed-bottom navbar-dark bg-dark justify-content-center">
       <a class="navbar-brand" href="https://github.com/mastamysta">
@@ -81,7 +100,5 @@
       </a>
     </div>
   </nav>
-
-
   </body>
 </html>
