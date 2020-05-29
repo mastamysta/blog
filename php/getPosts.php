@@ -33,7 +33,7 @@ function getPosts(){
         <div class="jumbotron p-5 m-5">
             <h2 class="display-5">' . getUserNameByEmail($emailResult) . ' at: '. $timeResult. '</h2>
             <hr class="my-2">
-            <p>Please check back in a week!</p>
+            <p>' . $contentResult . '</p>
         </div>
         ');
     }
