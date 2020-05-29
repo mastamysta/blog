@@ -51,7 +51,12 @@
             }else{
               $userName = getSessionName(checkSession());
               echo('
-                <ul class="mr-auto navbar-nav d-flex justify-content-end">
+                <ul class="navbar-nav d-flex justify-content-end">
+                  <li class="nav-item active p-2">
+                    <a href="compose.php" class="nav-link">
+                      Create a Post
+                    </a>
+                  </li>
                   <li class="nav-item active p-2">
                     <a href="#" class="nav-link">
                       Welcome Back ' . $userName . '
