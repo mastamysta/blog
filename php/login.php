@@ -1,5 +1,5 @@
 <?php
-    $id = random_int(0, 4294967295);
+    $id = random_int(0, 2147483647);
     session_id($id);
     session_start();
 
@@ -87,6 +87,7 @@
         mysqli_stmt_bind_param($sql2, "is", $id, $userEmail);
         mysqli_stmt_execute($sql2);
         mysqli_stmt_close($sql2);
+        echo("Session ID: " . session_id() . "<br>");
     }
 
     function updateHash($username, $plaintext, $conn) {
@@ -94,7 +95,7 @@
         $newSalt = checkSalt($newSalt);
         $newHash = utf8_encode(hash_hmac("sha256", $plaintext, $newSalt));
         $newStoredVal = $newSalt . "$" . $newHash;
-        echo($newStoredVal);
+        echo($newStoredVal . "<br>");
 
         //will be used to update hash for each login once fully implimented
         $sql = mysqli_prepare($conn, "UPDATE admin SET Hash= ? WHERE Username= ?");
@@ -106,7 +107,7 @@
         $newSalt = "";
         for($i = 0; $i <= strlen($salt) - 1; $i ++){
             if($salt[$i] == '$'){
-                echo("removed a $ error");
+                echo("removed a $ error<br>");
                 $newSalt = utf8_encode(random_bytes(16));
                 return checkSalt($newSalt);
             }

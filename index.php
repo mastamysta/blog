@@ -1,5 +1,13 @@
 <!doctype html>
 <html>
+  <?php
+    include("php/checkSession.php");
+    if(!checkSession()){
+
+    }else{
+      echo("Welcome back " . checkSession() . "<br>");
+    }
+  ?>
   <head>
     <meta charset="utf-8">
 
