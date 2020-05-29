@@ -27,7 +27,7 @@
           </li>
           <li class="nav-item disabled p-2">
             <a href="portfolio.php" class="nav-link disabled">
-              Portolio
+              Portfolio
             </a>
           </li>
           <li class="nav-item active p-2">
