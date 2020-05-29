@@ -16,7 +16,11 @@ function logout($email){
 
     //Create query
     $sql = mysqli_prepare($conn, "DELETE FROM sessions WHERE Email= ?");
-    mysqli_stmt_bind_param($sql, "i", $email);
+    mysqli_stmt_bind_param($sql, "s", $email);
+    
+    //Change session id
+    $id = random_int(0, 2147483647);
+    session_id($id);
 
     //Execute query
     mysqli_stmt_execute($sql);
