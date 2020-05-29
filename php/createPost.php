@@ -12,10 +12,11 @@ if(!checkSession()){
     //ptherwise returns corresponding user email
     function createPost(){
         //connection parameters
-        $servername = "localhost:3308";
-        $dbusername = "root";
-        $dbpassword = "";
-        $dbName = "adminaccounts";
+        $configParams = include("config.php");
+        $servername = $configParams["servername"];
+        $dbusername = $configParams["dbusername"];
+        $dbpassword = $configParams["dbpassword"];
+        $dbName = $configParams["dbName"];
 
         // Create connection
         $conn = new mysqli($servername, $dbusername, $dbpassword, $dbName);
