@@ -2,6 +2,11 @@
 <html>
   <?php
     include("../php/checkSession.php");
+    if(!checkSession()){
+
+    }else{
+      header("Location: ../index.php");
+    }
   ?>
   <head>
     <meta charset="utf-8">
