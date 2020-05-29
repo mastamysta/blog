@@ -2,11 +2,7 @@
 <html>
   <?php
     include("php/checkSession.php");
-    if(!checkSession()){
-
-    }else{
-      echo("Welcome back " . checkSession() . "<br>");
-    }
+    include("php/getSessionName.php");
   ?>
   <head>
     <meta charset="utf-8">
@@ -22,33 +18,52 @@
     <!-- NAVIGATION BAR -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="collapse navbar-collapse">
-        <ul class="mr-auto navbar-nav">
-          <li class="nav-item active">
+        <ul class="mr-auto navbar-nav d-flex justify-content-start">
+          <li class="nav-item active p-2">
             <a href="index.php" class="nav-link">
               Blog
             </a>
           </li>
-          <li class="nav-item disabled">
+          <li class="nav-item disabled p-2">
             <a href="portfolio.php" class="nav-link disabled">
               Portolio
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="views/contact.php" class="nav-link">
               Contact Me
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="views/register.php" class="nav-link">
               Blog Admin Registration
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="views/login.php" class="nav-link">
               Admin Login
             </a>
           </li>
         </ul>
+        <?php
+            if(!checkSession()){
+
+            }else{
+              $userName = getSessionName(checkSession());
+              echo('
+                <ul class="mr-auto navbar-nav d-flex justify-content-end">
+                  <li class="nav-item active p-2">
+                    <a href="views/login.php" class="nav-link">
+                      Welcome Back ' . $userName . '
+                    </a>
+                  </li>
+                  <li class="nav-item active p-2">
+                    <button class="btn btn-outline-light my-2 my-sm-0 " action="php/logout.php">Logout</button>
+                  </li>
+                </ul>
+              ');
+            }
+          ?>
       </div>
     </nav>
 
