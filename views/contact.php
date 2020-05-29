@@ -74,6 +74,12 @@
       </div>
     </nav>
 
+    <div class="jumbotron p-5 m-5">
+      <h2 class="display-3">Coming Soon!</h2>
+        <hr class="my-2">
+      <p>Check back soon...</p>
+    </div>
+
     <!--GITHUB LINK -->
     <nav class="navbar fixed-bottom navbar-dark bg-dark justify-content-center">
       <a class="navbar-brand" href="https://github.com/mastamysta">
