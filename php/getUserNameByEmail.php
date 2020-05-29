@@ -1,11 +1,7 @@
 <?php
-include("checkSession.php");
-$email = checkSession();
-logout($email);
-header("Location:../views/login.php");
-
-//function to logout user with provided email
-function logout($email){
+//returns username corresponding to a given email
+//returns false if none exists
+function getUserNameByEmail($email){
     //connection parameters
     $servername = "localhost:3308";
     $dbusername = "root";
@@ -17,16 +13,24 @@ function logout($email){
     mysqli_set_charset($conn, 'utf8');
 
     //Create query
-    $sql = mysqli_prepare($conn, "DELETE FROM sessions WHERE Email= ?");
+    $sql = mysqli_prepare($conn, "SELECT Username FROM admin WHERE Email= ?");
     mysqli_stmt_bind_param($sql, "s", $email);
+    $usernameResult;
 
     //Execute query
     mysqli_stmt_execute($sql);
+    mysqli_stmt_bind_result($sql, $usernameResult);
 
-    if(mysqli_stmt_affected_rows($sql) <= 0){
+    //Count results
+    $count = 0;
+    while(mysqli_stmt_fetch($sql)){
+        $count += 1;
+    }
+
+    if($count == 1){
         mysqli_stmt_close($sql);
         mysqli_close($conn);
-        die("A session error was encountered");
+        return $usernameResult;
     }else{
         mysqli_stmt_close($sql);
         mysqli_close($conn);

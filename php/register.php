@@ -37,6 +37,7 @@
   
 
     mysqli_close($conn);
+    header("Location:../views/login.php");
 
 
     function createHash($username, $plaintext, $conn) {
