@@ -3,6 +3,9 @@
 <?php
     include("../php/checkSession.php");
     include("../php/getSessionName.php");
+    if(!checkSession()){
+      header("Location:../index.php");
+    }
   ?>
   <head>
     <meta charset="utf-8">

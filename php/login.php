@@ -55,6 +55,9 @@
     }
 
     mysqli_close($conn);
+    header("Location:../views/compose.php");
+
+
 
     function checkHash($hash, $password){
 

@@ -5,6 +5,7 @@ if(!checkSession()){
     die("A sesion error occurred");
 }else{
     createPost();
+    header("Location:../index.php");
 }
 
     //returns false if session doesnt correspond  to an active user,

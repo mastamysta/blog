@@ -3,6 +3,7 @@
   <?php
     include("php/checkSession.php");
     include("php/getSessionName.php");
+    include("php/getPosts.php");
   ?>
   <head>
     <meta charset="utf-8">
@@ -76,11 +77,9 @@
 
 
     <!--IN DEVELOPMENT JUMBO SIGN-->
-    <div class="jumbotron p-5 m-5">
-      <h1 class="display-3">Dev Log Is Coming Soon</h1>
-      <hr class="my-2">
-      <p>Please check back in a week!</p>
-    </div>
+    <?php
+      getPosts();
+    ?>
 
 
     <!--GITHUB LINK -->
