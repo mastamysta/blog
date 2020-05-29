@@ -53,12 +53,14 @@
               echo('
                 <ul class="mr-auto navbar-nav d-flex justify-content-end">
                   <li class="nav-item active p-2">
-                    <a href="views/login.php" class="nav-link">
+                    <a href="#" class="nav-link">
                       Welcome Back ' . $userName . '
                     </a>
                   </li>
                   <li class="nav-item active p-2">
-                    <button class="btn btn-outline-light my-2 my-sm-0 " action="php/logout.php">Logout</button>
+                    <form action="php/logout.php" method="post" id="form1">
+                      <button id="logout-btn" class="btn btn-outline-light my-2 my-sm-0">Logout</button>
+                    </form>
                   </li>
                 </ul>
               ');
@@ -83,7 +85,5 @@
       </a>
     </div>
   </nav>
-
-
   </body>
 </html>

@@ -1,4 +1,7 @@
 <?php
+include("checkSession.php");
+$email = checkSession();
+logout($email);
 //function to logout user with provided email
 function logout($email){
     //connection parameters
@@ -17,16 +20,15 @@ function logout($email){
 
     //Execute query
     mysqli_stmt_execute($sql);
-    
 
-    if($count == 1){
-        mysqli_stmt_close($sql);
-        mysqli_close($conn);
-        return $userNameResult;
-    }else{
+    if(mysqli_stmt_affected_rows($sql) <= 0){
         mysqli_stmt_close($sql);
         mysqli_close($conn);
         die("A session error was encountered");
+    }else{
+        mysqli_stmt_close($sql);
+        mysqli_close($conn);
+        return false;
     }
 }
 ?>
