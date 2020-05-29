@@ -19,27 +19,27 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="collapse navbar-collapse">
         <ul class="mr-auto navbar-nav">
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="../index.php" class="nav-link">
               Blog
             </a>
           </li>
-          <li class="nav-item disabled">
+          <li class="nav-item disabled p-2">
             <a href="portfolio.php" class="nav-link disabled">
               Portolio
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="contact.php" class="nav-link">
               Contact Me
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="register.php" class="nav-link">
               Blog Admin Registration
             </a>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item active p-2">
             <a href="login.php" class="nav-link">
               Admin Login
             </a>
