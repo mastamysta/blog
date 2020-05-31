@@ -14,8 +14,22 @@ function getPosts(){
     $conn = new mysqli($servername, $dbusername, $dbpassword, $dbName);
     mysqli_set_charset($conn, 'utf8');
 
+    //get time (UNIX)
+    // $time = include("time.php");
+    // echo($time['y'] . "<br>");
+    // echo($time['h'] . ":");
+    // echo($time['m']  . ":");
+    // echo($time['s']);
+
+    //get date
+    $date = include("date.php");
+    $today = $date . " 00:00:01";
+
+
     //Create query
-    $sql = mysqli_prepare($conn, "SELECT * FROM posts");
+    $sql = mysqli_prepare($conn, "SELECT * FROM posts WHERE Time >= ?");
+ //   $sql = mysqli_prepare($conn, "SELECT * FROM posts");
+    mysqli_stmt_bind_param($sql,"s" ,$today);
     $sessionID = session_id();
     $postIDResult;
     $emailResult;
@@ -30,6 +44,7 @@ function getPosts(){
     $count = 0;
     while(mysqli_stmt_fetch($sql)){
         $count += 1;
+        //produce appropriate html code to display post entries
         echo('
         <div class="jumbotron p-5 m-5">
             <h2 class="display-5">' . getUserNameByEmail($emailResult) . ' at: '. $timeResult. '</h2>
