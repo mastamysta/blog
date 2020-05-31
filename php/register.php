@@ -1,8 +1,37 @@
 <?php
     //values posted for html login form
-    $USERNAME = $_POST["userName"];
-    $PASSWORD = $_POST["passWord"];
-    $EMAIL = $_POST["eMail"];
+
+
+    $USERNAME;
+    // validate username
+    if($_POST['userName'] == "") {
+        die("Please enter a username");
+    }elseif(trim($_POST['userName']) != $_POST["userName"]){
+        die("You may not have spaces in your username");
+    }elseif(filter_var($_POST["userName"], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW) != $_POST["userName"]){
+        die("You have used illegal characters in your username");
+    }else{
+        $USERNAME=$_POST["userName"];
+    }
+        
+    $PASSWORD;
+    if($_POST["passWord"] != ""){
+        filter_var($password, FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => "/.{6,25}/")));
+    }else{
+        die("Please enter a password");
+    }
+
+    //EMAIL VALIDATION
+    $EMAIL;
+    if($_POST["eMail"] != ""){
+        $EMAIL = trim($_POST["eMail"]);
+        $EMAIL = filter_var($EMAIL, FILTER_SANITIZE_EMAIL);
+    }
+    if (filter_var($EMAIL, FILTER_VALIDATE_EMAIL)) {
+        echo("$EMAIL is a valid email address");
+    } else {
+        die("Invalid email please try again...");
+    }
     
     //connection parameters
     $configParams = include("config.php");
@@ -25,6 +54,24 @@
     if($EMAIL != "benjamin-read@hotmail.co.uk"){
         die("You are not permitted to make an account");
     }
+
+    //check for email collisions
+    $sql = mysqli_prepare($conn, "SELECT * FROM admin WHERE Email= ?");
+    mysqli_stmt_bind_param($sql, "s", $EMAIL);
+    mysqli_stmt_execute($sql);
+    while(mysqli_stmt_fetch($sql)){
+        die("A user already exists with that email");
+    }
+    mysqli_stmt_close($sql);
+
+    //check for username collisions
+    $sql = mysqli_prepare($conn, "SELECT * FROM admin WHERE Username= ?");
+    mysqli_stmt_bind_param($sql, "s", $USERNAME);
+    mysqli_stmt_execute($sql);
+    while(mysqli_stmt_fetch($sql)){
+        die("A user already exists with that username");
+    }
+    mysqli_stmt_close($sql);
 
     //create SQL query
     $saltedPassword = createhash($USERNAME, $PASSWORD, $conn);
