@@ -1,7 +1,4 @@
 <?php
-    //values posted for html login form
-
-
     $USERNAME;
     // validate username
     if($_POST['userName'] == "") {
@@ -13,12 +10,15 @@
     }else{
         $USERNAME=$_POST["userName"];
     }
-        
+    
+    //password validation
     $PASSWORD;
-    if($_POST["passWord"] != ""){
-        filter_var($password, FILTER_VALIDATE_REGEXP, array( "options"=> array( "regexp" => "/.{6,25}/")));
-    }else{
+    if($_POST["passWord"] == ""){
         die("Please enter a password");
+    }elseif(strlen($_POST["passWord"] < 6 || strlen($_POST["passWord"]) > 25)){      
+        die("Please enter a password of length >= 6  length <= 25");
+    }else{
+        $PASSWORD = $_POST["passWord"];
     }
 
     //EMAIL VALIDATION
