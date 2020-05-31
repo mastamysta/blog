@@ -15,7 +15,7 @@
     $PASSWORD;
     if($_POST["passWord"] == ""){
         die("Please enter a password");
-    }elseif(strlen($_POST["passWord"] < 6 || strlen($_POST["passWord"]) > 25)){      
+    }elseif(strlen($_POST["passWord"]) < 6 || strlen($_POST["passWord"]) > 25){      
         die("Please enter a password of length >= 6  length <= 25");
     }else{
         $PASSWORD = $_POST["passWord"];
@@ -23,15 +23,20 @@
 
     //EMAIL VALIDATION
     $EMAIL;
-    if($_POST["eMail"] != ""){
-        $EMAIL = trim($_POST["eMail"]);
-        $EMAIL = filter_var($EMAIL, FILTER_SANITIZE_EMAIL);
-    }
-    if (filter_var($EMAIL, FILTER_VALIDATE_EMAIL)) {
-        echo("$EMAIL is a valid email address");
+    if($_POST["eMail"] == ""){
+        die("Please enter an email adress");
+    } elseif(trim($_POST["eMail"]) != $_POST["eMail"]){
+        die("You may not have spaces in an email address");
+    } elseif(filter_var($_POST["eMail"], FILTER_SANITIZE_EMAIL) != $_POST["eMail"]){
+        die("Invalid characters in email provided");
+    } elseif(!filter_var($_POST["eMail"], FILTER_VALIDATE_EMAIL)) {
+        die("Invalid email address");
     } else {
-        die("Invalid email please try again...");
+        $EMAIL = $_POST["eMail"];
     }
+
+    //TEMPORARY DIE LINE -------------------------------------------------------------------------------
+    die("credentials valid");
     
     //connection parameters
     $configParams = include("config.php");
@@ -49,10 +54,6 @@
     // Check connection
     if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
-    }
-
-    if($EMAIL != "benjamin-read@hotmail.co.uk"){
-        die("You are not permitted to make an account");
     }
 
     //check for email collisions
