@@ -2,7 +2,7 @@
 include("getUserNameByEmail.php");
 //returns false if session doesnt correspond  to an active user,
 //ptherwise returns corresponding user email
-function getPosts(){
+function getPosts($date){
     //connection parameters
     $configParams = include("config.php");
     $servername = $configParams["servername"];
@@ -21,15 +21,12 @@ function getPosts(){
     // echo($time['m']  . ":");
     // echo($time['s']);
 
-    //get date
-    $date = include("date.php");
-    $today = $date . " 00:00:01";
-
-
     //Create query
-    $sql = mysqli_prepare($conn, "SELECT * FROM posts WHERE Time >= ?");
+    $sql = mysqli_prepare($conn, "SELECT * FROM posts WHERE Time >= ? AND Time <= ?");
  //   $sql = mysqli_prepare($conn, "SELECT * FROM posts");
-    mysqli_stmt_bind_param($sql,"s" ,$today);
+    $d1 = $date  . " 00:00:01";
+    $d2 = $date . " 23:59:59";
+    mysqli_stmt_bind_param($sql,"ss" ,$d1, $d2);
     $sessionID = session_id();
     $postIDResult;
     $emailResult;

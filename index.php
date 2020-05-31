@@ -1,6 +1,7 @@
 <!doctype html>
 <html>
   <?php
+    xdebug_disable();
     include("php/checkSession.php");
     include("php/getSessionName.php");
     include("php/getPosts.php");
@@ -45,6 +46,9 @@
               Admin Login
             </a>
           </li>
+          <li class="nav-item active p-2">
+            <input type="date" name="datePickerName" id="datePickerID" class="form-control" placeholder="Date" aria-describedby="unHelpText">
+          </li>
         </ul>
         <?php
             if(!checkSession()){
@@ -78,7 +82,19 @@
 
     <!--IN DEVELOPMENT JUMBO SIGN-->
     <?php
-      getPosts();
+      $date;
+      $url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']."?".$_SERVER['QUERY_STRING'];
+
+      if($_SERVER['QUERY_STRING'] == NULL){
+        $date = include("php/date.php");
+      } else{
+        $url_components = parse_url($url);
+      
+        parse_str($url_components['query'], $params); 
+        $date = $params['date']; 
+      }
+  
+      getPosts($date);
     ?>
 
 
@@ -90,4 +106,5 @@
     </div>
   </nav>
   </body>
+  <script src="script/index.js"></script>
 </html>
