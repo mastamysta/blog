@@ -47,6 +47,9 @@
             </a>
           </li>
           <li class="nav-item active p-2">
+            <a href="#" class="nav-link">View Posts From: </a> 
+          </li>
+          <li class="nav-item active p-2">
             <input type="date" name="datePickerName" id="datePickerID" class="form-control" placeholder="Date" aria-describedby="unHelpText">
           </li>
         </ul>

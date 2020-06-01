@@ -54,7 +54,7 @@
 
     <!--ADMINR REGISTRATION FORM -->
     <div class="container p-5">
-      <h2>Register As An Admin</h2>
+      <h2>Register As A User</h2>
       <form action="../php/register.php" method="post" id="form1">
         <div class="form-group">
           <label for="exampleInputEmail1">Email address</label>
