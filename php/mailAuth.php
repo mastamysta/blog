@@ -23,30 +23,32 @@ function authenticate($EMAIL, $USERNAME, $KEY){
       $mail->Subject = 'Verify Your Account';
       $mail->Body = 'This is your authentication key for the site: ' . $KEY . "<br>" . "Use this auth link: http://blog/views/verify.php?key=$KEY&email=$EMAIL";
       
+      $params = include("mailConfig.php");
+      
       /* SMTP parameters. */
       
       /* Tells PHPMailer to use SMTP. */
       $mail->isSMTP();
       
       /* SMTP server address. */
-      $mail->Host = 'mail.benread.dev';
+      $mail->Host = $params["Host"];
    
       /* Use SMTP authentication. */
-      $mail->SMTPAuth = TRUE;
+      $mail->SMTPAuth = $params["SMTPAuth"];
       
       /* Set the encryption system. */
-      $mail->SMTPSecure = 'tls';
+      $mail->SMTPSecure = $params["SMTPSecure"];
       
       /* SMTP authentication username. */
-      $mail->Username = 'webmaster@benread.dev';
+      $mail->Username = $params["Username"];
       
       /* SMTP authentication password. */
-      $mail->Password = 'XLuEM(b-Uhwe';
+      $mail->Password = $params["Password"];
       
       /* Set the SMTP port. */
-      $mail->Port = 26;
+      $mail->Port = $params["Port"];
 
-      $mail->SMTPDebug = 4; 
+      $mail->SMTPDebug = $params["SMTPDebug"];
       
       /* Finally send the mail. */
       $mail->send();
