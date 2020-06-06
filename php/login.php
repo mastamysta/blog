@@ -8,7 +8,7 @@
     $PASSWORD = $_POST["passWord"];
     
     //connection parameters
-    $configParams = include("config.php");
+    $configParams = include("configs/config.php");
     $servername = $configParams["servername"];
     $dbusername = $configParams["dbusername"];
     $dbpassword = $configParams["dbpassword"];

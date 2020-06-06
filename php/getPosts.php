@@ -4,7 +4,7 @@ include("getUserNameByEmail.php");
 //ptherwise returns corresponding user email
 function getPosts($date){
     //connection parameters
-    $configParams = include("config.php");
+    $configParams = include("configs/config.php");
     $servername = $configParams["servername"];
     $dbusername = $configParams["dbusername"];
     $dbpassword = $configParams["dbpassword"];
@@ -42,13 +42,25 @@ function getPosts($date){
     while(mysqli_stmt_fetch($sql)){
         $count += 1;
         //produce appropriate html code to display post entries
-        echo('
+        $pre = ('
         <div class="jumbotron p-5 m-5">
-            <h2 class="display-5">' . getUserNameByEmail($emailResult) . ' at: '. $timeResult. '</h2>
+            <h2 class="display-5">
+        ');
+        $emailandtime = getUserNameByEmail($emailResult) . ' at: ' . $timeResult;
+        $mid = ('
+        </h2>
             <hr class="my-2">
-            <p>' . $contentResult . '</p>
+            <p>
+        ');
+        $post = ('
+        </p>
         </div>
         ');
+        echo($pre);
+        echo htmlspecialchars($emailandtime, ENT_QUOTES, 'UTF-8');
+        echo($mid);
+        echo htmlspecialchars($contentResult, ENT_QUOTES, 'UTF-8');
+        echo($post);
     }
 
         mysqli_stmt_close($sql);

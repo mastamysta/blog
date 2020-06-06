@@ -3,7 +3,7 @@
 //returns false if none exists
 function getUserNameByEmail($email){
     //connection parameters
-    $configParams = include("config.php");
+    $configParams = include("configs/config.php");
     $servername = $configParams["servername"];
     $dbusername = $configParams["dbusername"];
     $dbpassword = $configParams["dbpassword"];
