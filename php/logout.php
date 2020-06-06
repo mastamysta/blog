@@ -7,7 +7,7 @@ header("Location:../views/login.php");
 //function to logout user with provided email
 function logout($email){
     //connection parameters
-    $configParams = include("config.php");
+    $configParams = include("configs/config.php");
     $servername = $configParams["servername"];
     $dbusername = $configParams["dbusername"];
     $dbpassword = $configParams["dbpassword"];

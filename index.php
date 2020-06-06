@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <?php
-    xdebug_disable();
+    //xdebug_disable();
     include("php/checkSession.php");
     include("php/getSessionName.php");
     include("php/getPosts.php");
