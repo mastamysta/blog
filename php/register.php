@@ -105,7 +105,8 @@
     authenticate($EMAIL, $USERNAME, $keyStr);
 
     mysqli_close($conn);
-    header("Location:../views/verify.php?email=$EMAIL");
+    //cant change header as smtp has altered it already
+    //header("Location:../views/verify.php?email=$EMAIL");
 
 
     function createHash($username, $plaintext, $conn) {

@@ -21,7 +21,7 @@ function authenticate($EMAIL, $USERNAME, $KEY){
       $mail->setFrom('webmaster@benread.dev', 'DO NOT REPLY -- USER AUTHENTICATION');
       $mail->addAddress($EMAIL, 'Site User');
       $mail->Subject = 'Verify Your Account';
-      $mail->Body = 'This is your authentication key for the site: ' . $KEY . "<br>" . "Use this auth link: http://blog/views/verify.php?key=$KEY&email=$EMAIL";
+      $mail->Body = 'This is your authentication key for the site: ' . $KEY . "<br>" . "Use this auth link: http:/www.benread.dev/views/verify.php?key=$KEY&email=$EMAIL";
       
       $params = include("configs/mailConfig.php");
       
