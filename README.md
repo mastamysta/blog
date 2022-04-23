@@ -1,7 +1,7 @@
 <h1>blog.php</h1>
 <h2>Background</h2>
 <p>
-  The aim of this project is to produce a small personal log website to be hosted on my personal domain: https://www.benread.dev
+  The aim of this project is to produce a small personal log website to be hosted on my personal domain: 'no longer hosted'
   The site is a blog which allows me to sign in (as the sole user) and quickly post small chunks of prose (an hopefully images).
 </p>
 <h2>Code</h2>
